@@ -1,0 +1,12 @@
+name: SingleIPPlugin
+version: 2.0.0
+main: com.chagui68.singleip.SingleIPPlugin
+api-version: 1.20
+author: Chagui68
+description: IP restriction plugin with country filtering and access logging
+
+commands:
+  ipmanager:
+    description: Manage player IPs (console only)
+    usage: /ipmanager <add|remove|list|info|reset> <player> [ip]
+    aliases: [ipm, manageip]

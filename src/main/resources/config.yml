@@ -1,0 +1,30 @@
+messages:
+  kick: '&cAccess denied. You can only connect from your registered IPs.'
+  kick-country: '&cAccess denied. Your country is not allowed on this server.'
+  first-connection: '&aPrimary IP registered successfully.'
+  second-ip-added: '&aSecond IP added successfully for {player}.'
+  ip-removed: '&eIP removed for {player}.'
+  player-not-found: '&cPlayer not found in the database.'
+  invalid-ip: '&cInvalid IP format.'
+  max-ips-reached: '&cThis player already has 2 IPs registered. Remove one first.'
+  no-permission: '&cYou do not have permission to use this command.'
+
+debug: false
+max-ips-per-player: 2
+
+country-filter:
+  enabled: true
+  mode: whitelist
+  countries:
+    - CO
+    - US
+    - MX
+  allow-local-ips: true
+  cache-duration: 30
+
+access-logs:
+  enabled: true
+  save-device-name: true
+  save-country: true
+  max-logs-per-player: 10
+  show-in-console: true
