@@ -7,7 +7,7 @@
 
     <groupId>com.chagui68</groupId>
     <artifactId>SingleIPPlugin</artifactId>
-    <version>1.2</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>SingleIPPlugin</name>
