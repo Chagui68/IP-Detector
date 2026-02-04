@@ -12,6 +12,9 @@ messages:
 debug: false
 max-ips-per-player: 2
 
+kick-message: '&c✖ Unauthorized IP address\n&7This IP is not registered for your account\n&eContact an administrator if you need help'
+log-failed-attempts: true
+
 country-filter:
   enabled: true
   mode: whitelist

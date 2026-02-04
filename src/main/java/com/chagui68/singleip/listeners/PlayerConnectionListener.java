@@ -34,6 +34,7 @@ public class PlayerConnectionListener implements Listener {
         if (!dataManager.hasRegisteredIP(uuid)) {
             dataManager.registerFirstIP(uuid, playerIP);
             plugin.getLogger().info("First IP registered for " + playerName + ": " + playerIP);
+            plugin.getAccessLogger().logAccessAttempt(uuid, playerName, playerIP, "First connection");
             return;
         }
 
@@ -48,10 +49,14 @@ public class PlayerConnectionListener implements Listener {
 
             String reason = "IP not registered (" + registeredIPs.size() + "/" + maxIPs + " IPs used)";
             dataManager.logFailedLogin(playerName, uuid, playerIP, reason);
+            plugin.getAccessLogger().logAccessAttempt(uuid, playerName, playerIP, "DENIED - " + reason);
 
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, kickMessage);
             plugin.getLogger().warning("Connection denied - Player: " + playerName + " | IP: " + playerIP);
+            return;
         }
+
+        plugin.getAccessLogger().logAccessAttempt(uuid, playerName, playerIP, "Authorized connection");
     }
 
     @EventHandler
@@ -63,6 +68,10 @@ public class PlayerConnectionListener implements Listener {
             String ip = player.getAddress().getAddress().getHostAddress();
             dataManager.registerFirstIP(uuid, ip);
             plugin.getLogger().info("First IP registered for " + player.getName() + ": " + ip);
+            return;
         }
+
+        String ip = player.getAddress().getAddress().getHostAddress();
+        plugin.getAccessLogger().logAccessAttempt(uuid, player.getName(), ip, "Successful login");
     }
 }

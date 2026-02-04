@@ -96,8 +96,8 @@ public class IPCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        // El nombre se mantiene por vagancia aunque podria colocar que sea Ips en vez de secondIp ( No quise cambiar eso ) :V
         if (dataManager.addSecondIP(uuid, ip)) {
+            plugin.getAccessLogger().logAccessAttempt(uuid, playerName, ip, "Manual IP addition (/ipmanager add)");
             sender.sendMessage(ChatColor.GREEN + "✓ IP added successfully");
             sender.sendMessage(ChatColor.GRAY + "Player: " + ChatColor.WHITE + playerName);
             sender.sendMessage(ChatColor.GRAY + "IP added: " + ChatColor.WHITE + ip);
@@ -134,6 +134,7 @@ public class IPCommand implements CommandExecutor, TabCompleter {
         }
 
         if (dataManager.removeIP(uuid, ip)) {
+            plugin.getAccessLogger().logAccessAttempt(uuid, playerName, ip, "Manual IP removal (/ipmanager remove)");
             sender.sendMessage(ChatColor.GREEN + "✓ IP removed successfully");
             sender.sendMessage(ChatColor.GRAY + "Player: " + ChatColor.WHITE + playerName);
             sender.sendMessage(ChatColor.GRAY + "IP removed: " + ChatColor.WHITE + ip);
@@ -267,7 +268,6 @@ public class IPCommand implements CommandExecutor, TabCompleter {
 
     private boolean handleFailedLogins(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            // Mostrar últimos 10 intentos fallidos globales
             List<Map<String, String>> attempts = dataManager.getFailedLogins(10);
 
             if (attempts.isEmpty()) {
@@ -293,7 +293,6 @@ public class IPCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 2) {
-            // Mostrar intentos fallidos de un jugador específico
             String playerName = args[1];
             OfflinePlayer target = Bukkit.getOfflinePlayer(playerName);
             UUID uuid = target.getUniqueId();
